@@ -24,8 +24,8 @@ export default {
             this.ctx = this.$refs.canvasShape.getContext('2d')
         },
         draw: function () {
-        	this.ctx.clearRect(0, 0, this.width, this.height)
-        	this.shapeList.forEach(shape => shape.draw(this.ctx))
+            this.ctx.clearRect(0, 0, this.width, this.height)
+            this.shapeList.forEach(shape => shape.draw(this.ctx))
         },
         animationFrame: function () {
             window.requestAnimationFrame(() => {
@@ -34,33 +34,33 @@ export default {
             })
         },
         mousedownFunc: function (event) {
-        	let x = event.offsetX
-        	let y = event.offsetY
-        	let hoverList = []
-        	this.shapeList.forEach(shape => {
-        		shape.isHover(x, y) && (hoverList.push(shape))
-        	})
-        	if (hoverList.length) {
-        		// 对选中的图形做排序，zIndex最大的那个图形即当前鼠标选择的图形
-        		hoverList.sort((x, y) => y.zIndex - x.zIndex)
-        		this.activeShape = hoverList[0]
-        		this.activeShape.setOffset(x, y)
-        		this.activeShape.zIndex = Math.max(...this.shapeList.map(shape => shape.zIndex)) + 1
-        		this.shapeList.sort((x, y) => x.zIndex - y.zIndex)
-        	}
+            let x = event.offsetX
+            let y = event.offsetY
+            let hoverList = []
+            this.shapeList.forEach(shape => {
+                shape.isHover(x, y) && (hoverList.push(shape))
+            })
+            if (hoverList.length) {
+                // 对选中的图形做排序，zIndex最大的那个图形即当前鼠标选择的图形
+                hoverList.sort((x, y) => y.zIndex - x.zIndex)
+                this.activeShape = hoverList[0]
+                this.activeShape.setOffset(x, y)
+                this.activeShape.zIndex = Math.max(...this.shapeList.map(shape => shape.zIndex)) + 1
+                this.shapeList.sort((x, y) => x.zIndex - y.zIndex)
+            }
         },
         mousemoveFunc: function (event) {
-        	if (this.activeShape) {
-        		let x = event.offsetX
-        		let y = event.offsetY
-        		this.activeShape.setPosition(x, y)
-        	}
+            if (this.activeShape) {
+                let x = event.offsetX
+                let y = event.offsetY
+                this.activeShape.setPosition(x, y)
+            }
         },
         mouseupFunc: function () {
-        	this.activeShape = null
+            this.activeShape = null
         },
         mouseleaveFunc: function () {
-        	this.activeShape = null
+            this.activeShape = null
         }
     },
     mounted: function () {
