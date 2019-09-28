@@ -1,11 +1,12 @@
 <template>
-    <canvas class="canvasShape" ref="canvasShape" v-bind:width="width" v-bind:height="height" v-on:mousedown="mousedownFunc($event)" v-on:mousemove="mousemoveFunc" v-on:mouseup="mouseupFunc" v-on:mouseleave="mouseleaveFunc"></canvas>
+    <canvas class="canvasShape" ref="canvasShape" v-bind:width="width" v-bind:height="height" v-on:mousedown="mousedownFunc($event)" v-on:mousemove="mousemoveFunc" v-on:mouseup="mouseupFunc" v-on:mouseleave="mouseleaveFunc" v-bind:style="`cursor: ${cursor};`"></canvas>
 </template>
 <script>
 import Circle from '@/lib/circle'
 import Triangle from '@/lib/triangle'
 import Rectangle from '@/lib/rectangle'
 import Dolphin from '@/lib/dolphin'
+import FivePointedStar from '@/lib/fivePointedStar'
 export default {
     data: function () {
         return {
@@ -17,8 +18,10 @@ export default {
                 new Circle(100, 100, 50, 'red', 0),
                 new Triangle(200, 200, 100, 'green', 0),
                 new Rectangle(300, 300, 100, 50, 'blue', 0),
+                new FivePointedStar(300, 300, 100, 'orange', 0),
                 new Dolphin(400, 100, 400, 0)
-            ]
+            ],
+            cursor: 'auto'
         }
     },
     methods: {
@@ -57,6 +60,8 @@ export default {
                 let y = event.offsetY
                 this.activeShape.setPosition(x, y)
             }
+            let temp = this.shapeList.filter(shape => shape.isHover(event.offsetX, event.offsetY))
+            this.cursor = temp.length ? 'pointer' : 'auto'
         },
         mouseupFunc: function () {
             this.activeShape = null

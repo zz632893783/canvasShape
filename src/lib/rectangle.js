@@ -30,24 +30,18 @@ class Rectangle {
         })
     }
     isHover (x, y) {
-        let result = false
-        if (this.createLineFunctionByPoint(this.pointList[0], this.pointList[1])(x) <= y && this.createLineFunctionByPoint(this.pointList[2], this.pointList[3])(x) >= y && x >= this.x && x <= this.x + this.width) {
-            result = true
-        }
-        return result
+        return this.x <= x && this.x + this.width >= x && this.y <= y && this.y + this.height >= y
     }
     draw (ctx) {
         ctx.beginPath()
-        ctx.moveTo(this.pointList[0].x, this.pointList[0].y)
-        ctx.lineTo(this.pointList[1].x, this.pointList[1].y)
-        ctx.lineTo(this.pointList[2].x, this.pointList[2].y)
-        ctx.lineTo(this.pointList[3].x, this.pointList[3].y)
+        // ctx.moveTo(this.pointList[0].x, this.pointList[0].y)
+        // ctx.lineTo(this.pointList[1].x, this.pointList[1].y)
+        // ctx.lineTo(this.pointList[2].x, this.pointList[2].y)
+        // ctx.lineTo(this.pointList[3].x, this.pointList[3].y)
+        ctx.rect(this.x, this.y, this.width, this.height)
         ctx.closePath()
         ctx.fillStyle = this.fillStyle
         ctx.fill()
-    }
-    createLineFunctionByPoint (firstPoint, lastPoint) {
-        return x => (firstPoint.y - lastPoint.y) / (firstPoint.x - lastPoint.x) * x + firstPoint.y - (firstPoint.y - lastPoint.y) / (firstPoint.x - lastPoint.x) * firstPoint.x
     }
     setOffset (x, y) {
         this.offsetX = x - this.x
