@@ -5,6 +5,7 @@
 import Circle from '@/lib/circle'
 import Triangle from '@/lib/triangle'
 import Rectangle from '@/lib/rectangle'
+import Dolphin from '@/lib/dolphin'
 export default {
     data: function () {
         return {
@@ -15,7 +16,8 @@ export default {
             shapeList: [
                 new Circle(100, 100, 50, 'red', 0),
                 new Triangle(200, 200, 100, 'green', 0),
-                new Rectangle(300, 300, 100, 50, 'blue', 0)
+                new Rectangle(300, 300, 100, 50, 'blue', 0),
+                new Dolphin(400, 100, 400, 0)
             ]
         }
     },
